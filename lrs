@@ -11,6 +11,7 @@ def parse_arguments():
     parser.add_argument('--port', type=int, default=8000, help='Specify the port number (default: 8000).')
     parser.add_argument('--dir', default=os.getcwd(), help='Specify the directory to serve (default: current directory).')
     parser.add_argument('--mode', default="", help='Specify the mode to monitor changes (options are html, js, css, or a combination such as html,css. Default: empty, to monitor all changes).')
+    parser.add_argument('--verbose', action='store_true', help='Output verbose message.')
     return parser.parse_args()
 
 class RequestHandler(http.server.SimpleHTTPRequestHandler):
@@ -54,6 +55,12 @@ if __name__ == "__main__":
     class Handler(RequestHandler):
         def __init__(self, *args, **kwargs):
             super().__init__(*args, mode=cmd_args.mode, directory=cmd_args.dir, **kwargs)
+
+        def log_message(self, format, *args):
+            if cmd_args.verbose:
+                super().log_message(format, *args)
+            else:
+                pass
 
     socketserver.TCPServer.allow_reuse_address = True
     with socketserver.TCPServer(("", cmd_args.port), Handler) as httpd:
