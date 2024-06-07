@@ -30,5 +30,6 @@ options:
   --port PORT  Specify the port number (default: 8000).
   --dir DIR    Specify the directory to serve (default: current directory).
   --mode MODE  Specify the mode to monitor changes (options are html, js, css, or a combination such as html,css. Default: empty, to monitor all changes).
+  --verbose    Output verbose message.
 ```
 
