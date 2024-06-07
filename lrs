@@ -54,7 +54,8 @@ if __name__ == "__main__":
     class Handler(RequestHandler):
         def __init__(self, *args, **kwargs):
             super().__init__(*args, mode=cmd_args.mode, directory=cmd_args.dir, **kwargs)
-        
+
+    socketserver.TCPServer.allow_reuse_address = True
     with socketserver.TCPServer(("", cmd_args.port), Handler) as httpd:
         host = socket.gethostbyname_ex(socket.gethostname())[-1]
         print(f"Serving on {host}:{cmd_args.port}")
