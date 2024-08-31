@@ -1,0 +1,25 @@
+#!/usr/bin/env sh
+
+[ $# -eq 0 ] && {
+    echo "Dirname not provided. Run as \`$(basename $0) project-name'."
+    exit 1
+}
+
+mkdir "$1" && cd "$1" || exit 1
+
+cat <<EOF >Makefile
+.PHONY: dev
+
+lrs:
+	curl -O https://raw.githubusercontent.com/cxa/live-reload-server/main/lrs
+	chmod +x lrs
+
+dev: lrs
+	./lrs
+EOF
+
+cat <<EOF >index.html
+<h1>Hello, world!</h1>
+EOF
+
+make dev

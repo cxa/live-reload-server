@@ -12,6 +12,12 @@ chmod +x lrs
 ./lrs
 ```
 
+### To quickly scaffold a project
+
+``` shell
+curl -sSL https://raw.githubusercontent.com/cxa/live-reload-server/main/lrs-scaffold | sh -s -- proj-name
+```
+
 ## If You're Still Reading
 
 `lrs`, short for "live-reload-server", is a static file server. While it may not be fancier than others, it automatically provides live reload using [live.js](https://livejs.com).
